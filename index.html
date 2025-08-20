@@ -1,83 +1,511 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Portfolio of Dhruv Patel - Frontend Developer & UI/UX Designer">
-  <meta name="author" content="Dhruv Patel">
-  <title>Dhruv Patel - Portfolio</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f5f5f5;
-      color: #333;
-    }
-    header {
-      text-align: center;
-      padding: 2rem;
-      background: #222;
-      color: white;
-    }
-    header img {
-      border-radius: 50%;
-      width: 120px;
-      height: 120px;
-    }
-    main {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1rem;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    h1 {
-      margin-bottom: 0.5rem;
-    }
-    p {
-      text-align: justify;
-      line-height: 1.6;
-    }
-    .skills {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-weight: bold;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-      background: #222;
-      color: white;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dhruv Patel - Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /*
+         * Global Styles & Variables (Light Mode)
+         * Defines a professional color palette and base typography.
+        */
+        :root {
+            --bg-color: #f8f9fa;
+            --card-bg: #ffffff;
+            --text-color-dark: #212529;
+            --text-color-medium: #6c757d;
+            --accent-color: #3f51b5; /* A strong, professional blue */
+            --accent-glow: #3f51b5;
+            --border-radius-lg: 16px;
+            --border-radius-sm: 8px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color-medium);
+            background-color: var(--bg-color);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        /*
+         * Header Section
+        */
+        .header {
+            background: var(--accent-color);
+            color: var(--card-bg);
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(63, 81, 181, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+            animation: pulse-glow 10s infinite alternate;
+        }
+
+        @keyframes pulse-glow {
+            from { transform: scale(0.8); opacity: 0.5; }
+            to { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        .header .profile-pic {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 4px solid var(--card-bg);
+            margin-bottom: 25px;
+            object-fit: cover;
+            box-shadow: 0 0 15px var(--accent-glow);
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .profile-pic:hover {
+            transform: scale(1.05);
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+
+        .header .role {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+        }
+
+        .header .tagline {
+            font-style: italic;
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /*
+         * Main Content Layout
+        */
+        .main-content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        section {
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius-sm);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: border-color 0.3s ease;
+        }
+        
+        section:hover {
+            border-color: rgba(63, 81, 181, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--text-color-dark);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+        }
+        
+        /*
+         * Skills Section
+        */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: var(--bg-color);
+            padding: 15px;
+            border-radius: var(--border-radius-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .skill-name {
+            font-weight: 600;
+            color: var(--text-color-dark);
+        }
+
+        .progress-bar {
+            width: 55%;
+            height: 6px;
+            background: #e9ecef;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /*
+         * Projects Section
+        */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        
+        .project-card {
+            background: var(--bg-color);
+            padding: 25px;
+            border-radius: var(--border-radius-sm);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .project-card p {
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            color: var(--text-color-medium);
+        }
+
+        .project-card a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .project-card a:hover {
+            color: var(--text-color-dark);
+        }
+
+        /*
+         * Testimonials Section
+        */
+        .testimonial-card {
+            background: var(--bg-color);
+            padding: 20px;
+            border-left: 4px solid var(--accent-color);
+            border-radius: var(--border-radius-sm);
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 10px;
+            color: var(--text-color-medium);
+        }
+
+        .testimonial-card .author {
+            font-weight: 600;
+            text-align: right;
+            color: var(--text-color-dark);
+        }
+
+        /*
+         * Contact Section
+        */
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .contact-links a {
+            text-decoration: none;
+            color: var(--text-color-medium);
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .contact-links a i {
+            margin-right: 15px;
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+            color: var(--text-color-medium);
+            transition: color 0.3s ease;
+        }
+        
+        .contact-links a:hover i {
+            color: var(--accent-color);
+        }
+        
+        /*
+         * Footer Section
+        */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: var(--accent-color);
+            color: var(--card-bg);
+            margin-top: 40px;
+            border-radius: var(--border-radius-lg);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /*
+         * RESPONSIVE DESIGN
+         * Adapts the layout for various screen sizes.
+        */
+        @media (min-width: 768px) {
+            .main-content {
+                grid-template-columns: 2fr 1fr;
+            }
+
+            .main-content .full-width {
+                grid-column: 1 / 3;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .projects-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <img src="https://avatars.githubusercontent.com/u/111553440?v=4" alt="Dhruv Patel - Profile Photo">
-    <h1>Dhruv Patel</h1>
-    <h3>Frontend Developer & UI/UX Designer</h3>
-  </header>
+    <div class="container">
+        <header class="header" id="home">
+            <img src="https://avatars.githubusercontent.com/u/111553440?v=4" alt="Dhruv Patel" class="profile-pic">
+            <h1>Dhruv Patel</h1>
+            <p class="role">Frontend Developer | UI/UX Designer | AIML Enthusiast</p>
+            <p class="tagline">Designing digital solutions today, innovating tomorrow’s tech.</p>
+        </header>
 
-  <main>
-    <p>
-      I am a student of Artificial Intelligence & Machine Learning (AIML) in
-      Bachelor of Technology at JG University. Recently, I completed my Diploma
-      Studies in Information Technology from R.C. Technical Institute. I also
-      completed internships during my Diploma Studies, focusing on Web Design &
-      the React Framework.
-    </p>
+        <main class="main-content">
+            <section id="about" class="full-width">
+                <h2>👤 About Me</h2>
+                <p>I am Dhruv Patel, a passionate Frontend Developer, UI/UX Designer, and AIML student. Currently pursuing B.Tech in Artificial Intelligence & Machine Learning at JG University, I specialize in building modern, responsive, and user-focused web solutions.</p>
+                <p>My journey started with a Diploma in Information Technology, which I completed in 2025 at R.C. Technical Institute, after finishing my 10th grade in 2022. Along the way, I discovered my passion for digital problem-solving and have since built multiple projects—ranging from creative UI effects to full-stack web apps.</p>
+                <p>Beyond academics, I aspire to become a Tech Entrepreneur, creating unique startups that solve real-world problems, help people, and generate value. My hobby lies in designing digital experiences, which I merge with my developer skills to build futuristic solutions.</p>
+            </section>
+            
+            <section id="education">
+                <h2>🎓 Education</h2>
+                <ul>
+                    <li><b>B.Tech in Artificial Intelligence & Machine Learning</b> – Ongoing, JG University</li>
+                    <li><b>Diploma in Information Technology</b> – Completed in 2025, R.C. Technical Institute (GTU)</li>
+                    <li><b>10th Grade</b> – Completed in 2022 (GSHSEB)</li>
+                </ul>
+            </section>
+            
+            <section id="experience">
+                <h2>💼 Experience</h2>
+                <ul>
+                    <li><b>Internship</b> at BrainyBeam Company – 2023 for Web Design</li>
+                    <li><b>Internship</b> at 360Design Company – 2024 for React</li>
+                </ul>
+            </section>
 
-    <div class="skills">
-      My Skills:<br>
-      | HTML | CSS | Tailwind | Bootstrap | Figma | Canva | Adobe Photoshop | Adobe Dreamweaver | WordPress |
+            <section id="skills" class="full-width">
+                <h2>🛠️ Skills</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">
+                        <span class="skill-name">HTML</span>
+                        <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">CSS</span>
+                        <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">JavaScript</span>
+                        <div class="progress-bar"><div class="progress" style="width: 45%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Tailwind CSS</span>
+                        <div class="progress-bar"><div class="progress" style="width: 50%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Bootstrap</span>
+                        <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Figma</span>
+                        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Canva</span>
+                        <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Adobe Photoshop</span>
+                        <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">Adobe Dreamweaver</span>
+                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="skill-item">
+                        <span class="skill-name">WordPress</span>
+                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="full-width">
+                <h2>🚀 Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <h3>Techy Dhruv</h3>
+                        <p>A startup business website showcasing tutorials, frontend design solutions, and tech resources.</p>
+                        <a href="https://techydhruv.com" target="_blank">View
+                        Website &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Recipe Finder</h3>
+                        <p>A smart recipe search platform that allows users to find recipes by entering available ingredients.</p>
+                        <a href="https://recipe-finder-d9f8d.web.app/" target="_blank">View Project &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Color Toolkit Project</h3>
+                        <p>A toolkit to generate, save, and explore colors with HEX/RGB formats.</p>
+                        <a href="https://github.com/aakhalidhruv28/Color-Toolkit-Project" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Quote Generator</h3>
+                        <p>A web app that fetches random motivational quotes with author names.</p>
+                        <a href="https://github.com/aakhalidhruv28/Quote-Generator" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>To-Do List Web App</h3>
+                        <p>A simple, responsive To-Do List with add, delete, and save features.</p>
+                        <a href="https://github.com/aakhalidhruv28/To-Do-List-Web-App" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Interactive Periodic Table</h3>
+                        <p>An interactive, clickable periodic table for chemistry learners.</p>
+                        <a href="https://github.com/aakhalidhruv28/Interactive-Periodic-Table" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Liquid Glass Effect</h3>
+                        <p>A futuristic liquid glass design effect built using CSS & JS.</p>
+                        <a href="https://github.com/aakhalidhruv28/Liquid-Glass-Effect" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>YouTube Video Downloader</h3>
+                        <p>A web tool to download YouTube videos easily.</p>
+                        <a href="https://github.com/aakhalidhruv28/Youtube-Video-Downloader" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+                    <div class="project-card">
+                        <h3>Interactive Quiz App</h3>
+                        <p>A quiz web app with multiple-choice questions and scoring features.</p>
+                        <a href="https://github.com/aakhalidhruv28/Interactive-Quiz-App" target="_blank">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="testimonials">
+                <h2>💬 Testimonials</h2>
+                <div class="testimonial-card">
+                    <p>“Dhruv's designing sense and design knowledge is excellent.”</p>
+                    <div class="author">– Rajesh Patel</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>“Nice developer for converting design to code perfectly.”</p>
+                    <div class="author">– Dhruv Patel</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>“Dhruv transformed my business from offline to online with web presence, social handles, and Google Business setup. He helped my business grow.”</p>
+                    <div class="author">– Ranjit Patel</div>
+                </div>
+            </section>
+            
+            <section id="contact">
+                <h2>📬 Contact Me</h2>
+                <div class="contact-links">
+                    <a href="mailto:dhruvaakhali@gmail.com">
+                        <i class="fa-solid fa-envelope"></i>
+                        dhruvaakhali@gmail.com
+                    </a>
+                    <a href="https://instagram.com/dhruv.aakhali._.28" target="_blank">
+                        <i class="fa-brands fa-instagram"></i>
+                        dhruv.aakhali._.28
+                    </a>
+                    <a href="https://github.com/aakhalidhruv28" target="_blank">
+                        <i class="fa-brands fa-github"></i>
+                        aakhalidhruv28
+                    </a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 Dhruv Patel, MIT Licensed</p>
+        </footer>
     </div>
-  </main>
-
-  <footer>
-    <p>© 2025 Dhruv Patel | Portfolio</p>
-  </footer>
 </body>
 </html>
