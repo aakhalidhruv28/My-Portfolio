@@ -224,16 +224,22 @@
             font-size: 0.95rem;
             margin-bottom: 20px;
             color: var(--text-color-medium);
+            flex-grow: 1;
         }
 
-        .project-card a {
+        .project-card .links a {
             color: var(--accent-color);
             text-decoration: none;
             font-weight: 600;
             transition: color 0.3s ease;
+            margin-right: 15px;
         }
 
-        .project-card a:hover {
+        .project-card .links a:last-child {
+            margin-right: 0;
+        }
+
+        .project-card .links a:hover {
             color: var(--text-color-dark);
         }
 
@@ -422,48 +428,73 @@
                     <div class="project-card">
                         <h3>Techy Dhruv</h3>
                         <p>A startup business website showcasing tutorials, frontend design solutions, and tech resources.</p>
-                        <a href="https://techydhruv.com" target="_blank">View
-                        Website &rarr;</a>
+                        <div class="links">
+                            <a href="https://techydhruv.com" target="_blank">View Project &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>Recipe Finder</h3>
                         <p>A smart recipe search platform that allows users to find recipes by entering available ingredients.</p>
-                        <a href="https://recipe-finder-d9f8d.web.app/" target="_blank">View Project &rarr;</a>
+                        <div class="links">
+                            <a href="https://recipe-finder-d9f8d.web.app/" target="_blank">View Project &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <h3>Professional Project Inquiry Form</h3>
+                        <p>A project/service inquiry form for freelancers with a modern Indian luxury aesthetic.</p>
+                        <div class="links">
+                            <a href="https://professional-project-inquiry-form.netlify.app/" target="_blank">View Project &rarr;</a>
+                            <a href="https://github.com/aakhalidhruv28/Professional-Project-Inquiry-Form" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>Color Toolkit Project</h3>
                         <p>A toolkit to generate, save, and explore colors with HEX/RGB formats.</p>
-                        <a href="https://github.com/aakhalidhruv28/Color-Toolkit-Project" target="_blank">View on GitHub &rarr;</a>
+                        <div class="links">
+                            <a href="https://github.com/aakhalidhruv28/Color-Toolkit-Project" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>Quote Generator</h3>
                         <p>A web app that fetches random motivational quotes with author names.</p>
-                        <a href="https://github.com/aakhalidhruv28/Quote-Generator" target="_blank">View on GitHub &rarr;</a>
+                        <div class="links">
+                            <a href="https://github.com/aakhalidhruv28/Quote-Generator" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>To-Do List Web App</h3>
                         <p>A simple, responsive To-Do List with add, delete, and save features.</p>
-                        <a href="https://github.com/aakhalidhruv28/To-Do-List-Web-App" target="_blank">View on GitHub &rarr;</a>
+                        <div class="links">
+                            <a href="https://github.com/aakhalidhruv28/To-Do-List-Web-App" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>Interactive Periodic Table</h3>
                         <p>An interactive, clickable periodic table for chemistry learners.</p>
-                        <a href="https://github.com/aakhalidhruv28/Interactive-Periodic-Table" target="_blank">View on GitHub &rarr;</a>
+                        <div class="links">
+                            <a href="https://github.com/aakhalidhruv28/Interactive-Periodic-Table" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>Liquid Glass Effect</h3>
                         <p>A futuristic liquid glass design effect built using CSS & JS.</p>
-                        <a href="https://github.com/aakhalidhruv28/Liquid-Glass-Effect" target="_blank">View on GitHub &rarr;</a>
+                        <div class="links">
+                            <a href="https://github.com/aakhalidhruv28/Liquid-Glass-Effect" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>YouTube Video Downloader</h3>
                         <p>A web tool to download YouTube videos easily.</p>
-                        <a href="https://github.com/aakhalidhruv28/Youtube-Video-Downloader" target="_blank">View on GitHub &rarr;</a>
+                        <div class="links">
+                            <a href="https://github.com/aakhalidhruv28/Youtube-Video-Downloader" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                     <div class="project-card">
                         <h3>Interactive Quiz App</h3>
                         <p>A quiz web app with multiple-choice questions and scoring features.</p>
-                        <a href="https://github.com/aakhalidhruv28/Interactive-Quiz-App" target="_blank">View on GitHub &rarr;</a>
+                        <div class="links">
+                            <a href="https://github.com/aakhalidhruv28/Interactive-Quiz-App" target="_blank">View on GitHub &rarr;</a>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -491,6 +522,10 @@
                         <i class="fa-solid fa-envelope"></i>
                         dhruvaakhali@gmail.com
                     </a>
+                    <a href="https://www.linkedin.com/in/dhruvrpatel28102006/" target="_blank">
+                        <i class="fa-brands fa-linkedin"></i>
+                        dhruvrpatel28102006
+                    </a>
                     <a href="https://instagram.com/dhruv.aakhali._.28" target="_blank">
                         <i class="fa-brands fa-instagram"></i>
                         dhruv.aakhali._.28
@@ -504,7 +539,7 @@
         </main>
 
         <footer class="footer">
-            <p>&copy; 2025 Dhruv Patel, MIT Licensed</p>
+            <p>&copy; 2025 Dhruv Patel. MIT Licensed.</p>
         </footer>
     </div>
 </body>
