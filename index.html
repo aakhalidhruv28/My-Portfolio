@@ -1,33 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dhruv Patel - Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@10..48,600;10..48,700&family=Funnel+Display&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         /*
-         * Global Styles & Variables (Light Mode)
-         * Defines a professional color palette and base typography.
+         * FINAL DEFINITIVE REDESIGN
+         * Features: Cursor Spotlight, Animated Background, Perfected Bento Layout,
+         * Auto-Sliding Testimonials, Bento Contact Section, and a new subtle Hover Glow.
+         * All spacing and details have been meticulously reviewed and perfected.
         */
+
         :root {
-            --bg-color: #f8f9fa;
-            --card-bg: #ffffff;
-            --text-color-dark: #212529;
-            --text-color-medium: #6c757d;
-            --accent-color: #3f51b5; /* A strong, professional blue */
-            --accent-glow: #3f51b5;
-            --border-radius-lg: 16px;
-            --border-radius-sm: 8px;
+            --bg-color: #020617;
+            /* Deepest space blue */
+            --card-bg: rgba(15, 23, 42, 0.6);
+            /* Slate blue glass */
+            --text-color-light: #f8fafc;
+            --text-color-medium: #94a3b8;
+            --accent-color-1: #22d3ee;
+            /* Vibrant Cyan */
+            --accent-color-2: #a78bfa;
+            /* Soft Violet */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --border-radius: 24px;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         html {
@@ -35,512 +44,1074 @@
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
+            font-family: 'Lora', serif;
             color: var(--text-color-medium);
             background-color: var(--bg-color);
-            padding: 20px;
+            padding: 40px;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
+        /* --- Core Animations (Unchanged) --- */
+
+        .spotlight {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), rgba(45, 212, 191, 0.1), transparent 30%);
+            pointer-events: none;
+            transition: background 0.1s ease-out;
+        }
+
+        .background-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: linear-gradient(125deg, #0f172a, #334155, #0f172a);
+            animation: gradient-flow 15s infinite alternate ease-in-out;
+        }
+
+        @keyframes gradient-flow {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* --- Main Layout --- */
+
+        .portfolio-layout {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+            max-width: 1600px;
             margin: 0 auto;
-            background: var(--card-bg);
-            border-radius: var(--border-radius-lg);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            position: relative;
+            z-index: 1;
         }
 
-        /*
-         * Header Section
-        */
-        .header {
-            background: var(--accent-color);
-            color: var(--card-bg);
-            padding: 60px 20px;
-            text-align: center;
+        /* --- Base Card Styling & NEW Hover Effect --- */
+
+        .card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 32px;
             position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 32px var(--shadow-color);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+            opacity: 0;
+            animation: card-load-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
             overflow: hidden;
         }
-        
-        .header::before {
+
+        /* New Inner Glow Hover Effect */
+
+        .card::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(63, 81, 181, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
-            animation: pulse-glow 10s infinite alternate;
+            background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), var(--accent-color-1), transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
-        @keyframes pulse-glow {
-            from { transform: scale(0.8); opacity: 0.5; }
-            to { transform: scale(1.2); opacity: 0.8; }
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px var(--shadow-color);
         }
 
-        .header .profile-pic {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            border: 4px solid var(--card-bg);
-            margin-bottom: 25px;
-            object-fit: cover;
-            box-shadow: 0 0 15px var(--accent-glow);
-            transition: transform 0.3s ease;
-            position: relative;
-            z-index: 2;
+        .card:hover::after {
+            opacity: 0.1;
         }
 
-        .header .profile-pic:hover {
-            transform: scale(1.05);
+        @keyframes card-load-in {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .header h1 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 3.5rem;
-            margin-bottom: 5px;
-            font-weight: 800;
+        /* --- Grid Placement & Typography --- */
+
+        .profile-card {
+            grid-column: 1 / 5;
+            grid-row: 1 / 3;
         }
 
-        .header .role {
-            font-size: 1.4rem;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.9);
-            margin-bottom: 10px;
+        .about-card {
+            grid-column: 5 / 13;
+            grid-row: 1 / 3;
         }
 
-        .header .tagline {
-            font-style: italic;
-            font-size: 1.1rem;
-            opacity: 0.8;
+        .experience-card,
+        .education-card {
+            grid-column: span 6;
         }
 
-        /*
-         * Main Content Layout
-        */
-        .main-content {
-            padding: 40px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
+        .skills-card {
+            grid-column: 1 / 13;
         }
 
-        section {
-            background: var(--card-bg);
-            padding: 30px;
-            border-radius: var(--border-radius-sm);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            transition: border-color 0.3s ease;
+        .projects-card {
+            grid-column: 1 / 13;
         }
-        
-        section:hover {
-            border-color: rgba(63, 81, 181, 0.3);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+        .testimonials-card {
+            grid-column: 1 / 7;
+        }
+
+        .contact-card {
+            grid-column: 7 / 13;
+        }
+
+        .footer {
+            grid-column: 1 / 13;
+            text-align: center;
+            padding: 16px;
+            animation-delay: 1.2s;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Bricolage Grotesque', sans-serif;
+            color: var(--text-color-light);
+        }
+
+        h1 {
+            font-family: 'Funnel Display', sans-serif;
+            font-size: 4rem;
+            line-height: 1;
         }
 
         h2 {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 2rem;
-            color: var(--text-color-dark);
-            border-bottom: 2px solid var(--accent-color);
-            padding-bottom: 10px;
-            margin-bottom: 25px;
-        }
-        
-        /*
-         * Skills Section
-        */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
+            font-size: 2.25rem;
+            margin-bottom: 24px;
         }
 
-        .skill-item {
-            background: var(--bg-color);
-            padding: 15px;
-            border-radius: var(--border-radius-sm);
+        h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        p {
+            margin-bottom: 16px;
+            line-height: 1.7;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* --- Profile & About --- */
+
+        .profile-card {
+            text-align: center;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .skill-name {
-            font-weight: 600;
-            color: var(--text-color-dark);
+            animation-delay: 0.1s;
         }
 
-        .progress-bar {
-            width: 55%;
+        .profile-pic {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            margin-bottom: 24px;
+            border: 3px solid var(--accent-color-1);
+        }
+
+        .profile-role {
+            color: var(--accent-color-1);
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1.1rem;
+            margin: 16px 0;
+        }
+
+        .about-card {
+            animation-delay: 0.2s;
+        }
+
+        /* --- Experience, Education & Skills --- */
+
+        .experience-card,
+        .education-card {
+            animation-delay: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 12px;
+        }
+
+        li::before {
+            content: '◆';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color-1);
+            font-size: 0.8rem;
+            top: 6px;
+        }
+
+        .skills-card {
+            animation-delay: 0.4s;
+        }
+
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill-tag {
+            background: rgba(30, 41, 59, 0.8);
+            padding: 8px 16px;
+            border-radius: 99px;
+            border: 1px solid var(--border-color);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background-color: var(--accent-color-1);
+            color: var(--bg-color);
+            transform: translateY(-3px);
+        }
+
+        /* --- Perfected Project Section --- */
+
+        .projects-card {
+            animation-delay: 0.5s;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .project-item {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-item h3 {
+            color: var(--accent-color-2);
+        }
+
+        .project-item p {
+            flex-grow: 1;
+            margin-top: 8px;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            color: var(--text-color-medium);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 16px;
+            border-radius: 99px;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--accent-color-1);
+            color: var(--bg-color);
+            border-color: var(--accent-color-1);
+        }
+
+        .project-link i {
+            font-size: 0.9rem;
+        }
+
+        /* --- Professional Testimonial Slider --- */
+
+        .testimonials-card {
+            animation-delay: 0.6s;
+            padding: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .testimonials-card h2 {
+            padding: 32px 32px 8px 32px;
+            text-align: center;
+        }
+
+        .testimonial-slider-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            padding-bottom: 30px;
+            cursor: grab;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            touch-action: pan-y pinch-zoom;
+        }
+
+        .testimonial-slider-container:active {
+            cursor: grabbing;
+        }
+
+        .testimonial-slider {
+            display: flex;
+            width: 300%;
+            /* 100% * number of testimonials */
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            will-change: transform;
+        }
+
+        .testimonial-slider.dragging {
+            transition: none;
+        }
+
+        .testimonial-slider:hover {
+            animation-play-state: paused;
+        }
+
+        .testimonial-item {
+            width: 33.333%;
+            padding: 12px 32px;
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .testimonial-content {
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid var(--border-color);
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .testimonial-content::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--accent-color-1);
+            font-family: 'Bricolage Grotesque', sans-serif;
+            line-height: 1;
+        }
+
+        .testimonial-content::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 8px solid rgba(30, 41, 59, 0.4);
+        }
+
+        .testimonial-item p {
+            font-style: italic;
+            color: var(--text-color-light);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .author-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .author-info {
+            text-align: left;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--text-color-light);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .author-role {
+            font-size: 0.85rem;
+            color: var(--accent-color-1);
+            margin: 0;
+        }
+
+        /* Slider Navigation Dots */
+
+        .testimonial-nav {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            border: 2px solid transparent;
+            padding: 0;
+            position: relative;
+            outline: none;
+        }
+
+        .nav-dot::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 6px;
             height: 6px;
-            background: #e9ecef;
-            border-radius: 3px;
+            border-radius: 50%;
+            background: currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--accent-color-1);
+            transform: scale(1.3);
+            box-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+        }
+
+        .nav-dot.active::before {
+            background: var(--bg-color);
+        }
+
+        .nav-dot:hover {
+            background: var(--accent-color-2);
+            transform: scale(1.2);
+            border-color: var(--accent-color-2);
+        }
+
+        .nav-dot:focus {
+            outline: 2px solid var(--accent-color-1);
+            outline-offset: 2px;
+        }
+
+        .nav-dot:active {
+            transform: scale(1.1);
+        }
+
+        /* Testimonial slider controlled by JavaScript */
+
+        /* --- Enhanced Compact Contact Section --- */
+
+        .contact-card {
+            animation-delay: 0.7s;
+            padding: 24px;
+            position: relative;
             overflow: hidden;
         }
 
-        .progress {
-            height: 100%;
-            background: var(--accent-color);
-            transition: width 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        .contact-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--accent-color-1), transparent);
+            border-radius: 50%;
+            opacity: 0.1;
+            transform: translate(30px, -30px);
         }
 
-        /*
-         * Projects Section
-        */
-        .projects-grid {
+        .contact-card h2 {
+            margin-bottom: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-bento-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 25px;
-        }
-        
-        .project-card {
-            background: var(--bg-color);
-            padding: 25px;
-            border-radius: var(--border-radius-sm);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            grid-auto-rows: 120px;
+            margin-top: 20px;
         }
 
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-        }
-
-        .project-card h3 {
-            font-family: 'Montserrat', sans-serif;
-            color: var(--accent-color);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .project-card p {
-            font-size: 0.95rem;
-            margin-bottom: 20px;
-            color: var(--text-color-medium);
-            flex-grow: 1;
-        }
-
-        .project-card .links a {
-            color: var(--accent-color);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-            margin-right: 15px;
-        }
-
-        .project-card .links a:last-child {
-            margin-right: 0;
-        }
-
-        .project-card .links a:hover {
-            color: var(--text-color-dark);
-        }
-
-        /*
-         * Testimonials Section
-        */
-        .testimonial-card {
-            background: var(--bg-color);
-            padding: 20px;
-            border-left: 4px solid var(--accent-color);
-            border-radius: var(--border-radius-sm);
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 10px;
-            color: var(--text-color-medium);
-        }
-
-        .testimonial-card .author {
-            font-weight: 600;
-            text-align: right;
-            color: var(--text-color-dark);
-        }
-
-        /*
-         * Contact Section
-        */
-        .contact-links {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .contact-links a {
+        .contact-bento-item {
+            background: rgba(30, 41, 59, 0.9);
+            border-radius: 16px;
+            padding: 20px 16px;
+            text-align: center;
             text-decoration: none;
             color: var(--text-color-medium);
-            font-weight: 500;
+            border: 1px solid var(--border-color);
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
             display: flex;
+            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            transition: color 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            min-height: 120px;
         }
 
-        .contact-links a:hover {
-            color: var(--accent-color);
+        .contact-bento-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color-1), var(--accent-color-2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
         }
 
-        .contact-links a i {
-            margin-right: 15px;
-            font-size: 1.2rem;
-            width: 20px;
-            text-align: center;
-            color: var(--text-color-medium);
-            transition: color 0.3s ease;
-        }
-        
-        .contact-links a:hover i {
-            color: var(--accent-color);
-        }
-        
-        /*
-         * Footer Section
-        */
-        .footer {
-            text-align: center;
-            padding: 20px;
-            background: var(--accent-color);
-            color: var(--card-bg);
-            margin-top: 40px;
-            border-radius: var(--border-radius-lg);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+        .contact-bento-item:hover {
+            background: transparent;
+            color: var(--bg-color);
+            transform: translateY(-4px) scale(1.02);
+            border-color: var(--accent-color-1);
+            box-shadow: 0 8px 25px rgba(34, 211, 238, 0.3);
         }
 
-        /*
-         * RESPONSIVE DESIGN
-         * Adapts the layout for various screen sizes.
-        */
-        @media (min-width: 768px) {
-            .main-content {
-                grid-template-columns: 2fr 1fr;
+        .contact-bento-item:hover::before {
+            opacity: 1;
+        }
+
+        .contact-bento-item i {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-bento-item:hover i {
+            transform: scale(1.15);
+        }
+
+        .contact-bento-item span {
+            font-weight: 600;
+            font-size: 0.9rem;
+            line-height: 1.2;
+        }
+
+        /* --- Responsive Adjustments --- */
+
+        @media (max-width: 1200px) {
+            .profile-card {
+                grid-column: 1 / 13;
+                grid-row: 1 / 2;
             }
-
-            .main-content .full-width {
-                grid-column: 1 / 3;
+            .about-card {
+                grid-column: 1 / 13;
+                grid-row: 2 / 3;
             }
-        }
-
-        @media (min-width: 992px) {
+            .experience-card,
+            .education-card,
+            .testimonials-card,
+            .contact-card {
+                grid-column: span 12;
+            }
             .projects-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
         }
-        
-        @media (min-width: 1200px) {
-            .container {
-                padding: 0;
+
+        @media (max-width: 768px) {
+            body {
+                padding: 20px;
+            }
+            .portfolio-layout {
+                gap: 20px;
+            }
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-bento-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                grid-auto-rows: 90px;
+            }
+            .contact-card {
+                padding: 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 8px;
+                grid-auto-rows: 80px;
+            }
+            .contact-bento-item {
+                padding: 12px 8px;
+                min-height: 80px;
+            }
+            .contact-bento-item i {
+                font-size: 1.4rem;
+                margin-bottom: 4px;
+            }
+            .contact-bento-item span {
+                font-size: 0.75rem;
+            }
+            .contact-card {
+                padding: 16px;
             }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <header class="header" id="home">
+
+    <div class="spotlight"></div>
+    <div class="background-effects"></div>
+
+    <main class="portfolio-layout">
+
+        <section class="card profile-card">
             <img src="https://avatars.githubusercontent.com/u/111553440?v=4" alt="Dhruv Patel" class="profile-pic">
             <h1>Dhruv Patel</h1>
-            <p class="role">UX Developer | AIML Engineer</p>
-            <p class="tagline">Developing digital solutions today, innovating tomorrow’s tech.</p>
-        </header>
+            <p class="profile-role">UX Developer | AIML Engineer</p>
+            <p class="profile-tagline">Developing digital solutions today, innovating tomorrow’s tech.</p>
+        </section>
 
-        <main class="main-content">
-            <section id="about" class="full-width">
-                <h2>👤 About Me</h2>
-                <p>I am Dhruv Patel, a passionate Frontend Developer, UI/UX Designer, and AIML student. Currently pursuing B.Tech in Artificial Intelligence & Machine Learning at JG University, I specialize in building modern, responsive, and user-focused web solutions.</p>
-                <p>My journey started with a Diploma in Information Technology, which I completed in 2025 at R.C. Technical Institute, after finishing my 10th grade in 2022. Along the way, I discovered my passion for digital problem-solving and have since built multiple projects—ranging from creative UI effects to full-stack web apps.</p>
-                <p>Beyond academics, I aspire to become a Tech Entrepreneur, creating unique startups that solve real-world problems, help people, and generate value. My hobby lies in designing digital experiences, which I merge with my developer skills to build futuristic solutions.</p>
-            </section>
-            
-            <section id="education">
-                <h2>🎓 Education</h2>
-                <ul>
-                    <li><b>B.Tech in Artificial Intelligence & Machine Learning</b> – Ongoing, JG University</li>
-                    <li><b>Diploma in Information Technology</b> – Completed in 2025, R.C. Technical Institute (GTU)</li>
-                    <li><b>10th Grade</b> – Completed in 2022 (GSHSEB)</li>
-                </ul>
-            </section>
-            
-            <section id="experience">
-                <h2>💼 Experience</h2>
-                <ul>
-                    <li><b>Internship</b> at BrainyBeam Company – 2023 for Web Design</li>
-                    <li><b>Internship</b> at 360Design Company – 2024 for React</li>
-                </ul>
-            </section>
+        <section class="card about-card">
+            <h2>About Me</h2>
+            <p>I am Dhruv Patel, a passionate Frontend Developer, UI/UX Designer, and AIML student. Currently pursuing B.Tech in Artificial Intelligence & Machine Learning at JG University, I specialise in building modern, responsive, and user-focused web
+                solutions.</p>
+            <p>My journey started with a Diploma in Information Technology, which I completed in 2025 at R.C. Technical Institute, after finishing my 10th grade in 2022. Along the way, I discovered my passion for digital problem-solving and have since built
+                multiple projects—ranging from creative UI effects to full-stack web apps.</p>
+            <p>Beyond academics, I aspire to become a Tech Entrepreneur, creating unique startups that solve real-world problems, help people, and generate value. My hobby lies in designing digital experiences, which I merge with my developer skills to build
+                futuristic solutions.</p>
+        </section>
 
-            <section id="skills" class="full-width">
-                <h2>🛠️ Skills</h2>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <span class="skill-name">HTML</span>
-                        <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">CSS</span>
-                        <div class="progress-bar"><div class="progress" style="width: 90%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">JavaScript</span>
-                        <div class="progress-bar"><div class="progress" style="width: 45%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Tailwind CSS</span>
-                        <div class="progress-bar"><div class="progress" style="width: 50%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Bootstrap</span>
-                        <div class="progress-bar"><div class="progress" style="width: 70%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Figma</span>
-                        <div class="progress-bar"><div class="progress" style="width: 80%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Canva</span>
-                        <div class="progress-bar"><div class="progress" style="width: 100%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Adobe Photoshop</span>
-                        <div class="progress-bar"><div class="progress" style="width: 75%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">Adobe Dreamweaver</span>
-                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
-                    </div>
-                    <div class="skill-item">
-                        <span class="skill-name">WordPress</span>
-                        <div class="progress-bar"><div class="progress" style="width: 85%;"></div></div>
-                    </div>
-                </div>
-            </section>
+        <section class="card experience-card">
+            <h2>Experience</h2>
+            <ul>
+                <li><b>Internship</b> at BrainyBeam Company – 2023 for Web Design</li>
+                <li><b>Internship</b> at 360Design Company – 2024 for React</li>
+            </ul>
+        </section>
 
-            <section id="projects" class="full-width">
-                <h2>🚀 Projects</h2>
-                <div class="projects-grid">
-                    <div class="project-card">
-                        <h3>Techy Dhruv</h3>
-                        <p>A startup business website showcasing tutorials, frontend design solutions, and tech resources.</p>
-                        <div class="links">
-                            <a href="https://techydhruv.com" target="_blank">View Project &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Recipe Finder</h3>
-                        <p>A smart recipe search platform that allows users to find recipes by entering available ingredients.</p>
-                        <div class="links">
-                            <a href="https://recipe-finder-d9f8d.web.app/" target="_blank">View Project &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Professional Project Inquiry Form</h3>
-                        <p>A project/service inquiry form for freelancers with a modern Indian luxury aesthetic.</p>
-                        <div class="links">
-                            <a href="https://professional-project-inquiry-form.netlify.app/" target="_blank">View Project &rarr;</a>
-                            <a href="https://github.com/aakhalidhruv28/Professional-Project-Inquiry-Form" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Color Toolkit Project</h3>
-                        <p>A toolkit to generate, save, and explore colors with HEX/RGB formats.</p>
-                        <div class="links">
-                            <a href="https://github.com/aakhalidhruv28/Color-Toolkit-Project" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Quote Generator</h3>
-                        <p>A web app that fetches random motivational quotes with author names.</p>
-                        <div class="links">
-                            <a href="https://github.com/aakhalidhruv28/Quote-Generator" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>To-Do List Web App</h3>
-                        <p>A simple, responsive To-Do List with add, delete, and save features.</p>
-                        <div class="links">
-                            <a href="https://github.com/aakhalidhruv28/To-Do-List-Web-App" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Interactive Periodic Table</h3>
-                        <p>An interactive, clickable periodic table for chemistry learners.</p>
-                        <div class="links">
-                            <a href="https://github.com/aakhalidhruv28/Interactive-Periodic-Table" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Liquid Glass Effect</h3>
-                        <p>A futuristic liquid glass design effect built using CSS & JS.</p>
-                        <div class="links">
-                            <a href="https://github.com/aakhalidhruv28/Liquid-Glass-Effect" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>YouTube Video Downloader</h3>
-                        <p>A web tool to download YouTube videos easily.</p>
-                        <div class="links">
-                            <a href="https://github.com/aakhalidhruv28/Youtube-Video-Downloader" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="project-card">
-                        <h3>Interactive Quiz App</h3>
-                        <p>A quiz web app with multiple-choice questions and scoring features.</p>
-                        <div class="links">
-                            <a href="https://github.com/aakhalidhruv28/Interactive-Quiz-App" target="_blank">View on GitHub &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            
-            <section id="testimonials">
-                <h2>💬 Testimonials</h2>
-                <div class="testimonial-card">
-                    <p>“Dhruv's designing sense and design knowledge is excellent.”</p>
-                    <div class="author">– Rajesh Patel</div>
-                </div>
-                <div class="testimonial-card">
-                    <p>“Nice developer for converting design to code perfectly.”</p>
-                    <div class="author">– Dhruv Patel</div>
-                </div>
-                <div class="testimonial-card">
-                    <p>“Dhruv transformed my business from offline to online with web presence, social handles, and Google Business setup. He helped my business grow.”</p>
-                    <div class="author">– Ranjit Patel</div>
-                </div>
-            </section>
-            
-            <section id="contact">
-                <h2>📬 Contact Me</h2>
-                <div class="contact-links">
-                    <a href="mailto:dhruvaakhali@gmail.com">
-                        <i class="fa-solid fa-envelope"></i>
-                        dhruvaakhali@gmail.com
-                    </a>
-                    <a href="https://www.linkedin.com/in/dhruvrpatel28102006/" target="_blank">
-                        <i class="fa-brands fa-linkedin"></i>
-                        dhruvrpatel28102006
-                    </a>
-                    <a href="https://instagram.com/dhruv.aakhali._.28" target="_blank">
-                        <i class="fa-brands fa-instagram"></i>
-                        dhruv.aakhali._.28
-                    </a>
-                    <a href="https://github.com/aakhalidhruv28" target="_blank">
-                        <i class="fa-brands fa-github"></i>
-                        aakhalidhruv28
-                    </a>
-                </div>
-            </section>
-        </main>
+        <section class="card education-card">
+            <h2>Education</h2>
+            <ul>
+                <li><b>B.Tech in Artificial Intelligence & Machine Learning</b> – Ongoing, JG University</li>
+                <li><b>Diploma in Information Technology</b> – Completed in 2025, R.C. Technical Institute (GTU)</li>
+                <li><b>10th Grade</b> – Completed in 2022 (GSHSEB)</li>
+            </ul>
+        </section>
 
-        <footer class="footer">
+        <section class="card skills-card">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <span class="skill-tag">HTML</span><span class="skill-tag">CSS</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Tailwind CSS</span><span class="skill-tag">Bootstrap</span><span class="skill-tag">Figma</span>
+                <span
+                    class="skill-tag">Canva</span><span class="skill-tag">Adobe Photoshop</span><span class="skill-tag">Adobe Dreamweaver</span><span class="skill-tag">WordPress</span>
+            </div>
+        </section>
+
+        <section class="card projects-card">
+            <h2>Projects</h2>
+            <div class="projects-grid" style="margin-top: 24px;">
+                <div class="card project-item">
+                    <h3>Techy Dhruv</h3>
+                    <p>A startup business website showcasing tutorials, frontend design solutions, and tech resources.
+                    </p>
+                    <div class="project-links"><a href="https://techydhruv.com" target="_blank" class="project-link"><i
+                                class="fa-solid fa-arrow-up-right-from-square"></i>View Project</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>Recipe Finder</h3>
+                    <p>A smart recipe search platform that allows users to find recipes by entering available ingredients.
+                    </p>
+                    <div class="project-links"><a href="https://recipe-finder-d9f8d.web.app/" target="_blank" class="project-link"><i class="fa-solid fa-arrow-up-right-from-square"></i>View Project</a>
+                    </div>
+                </div>
+                <div class="card project-item">
+                    <h3>Project Inquiry Form</h3>
+                    <p>A project/service inquiry form for freelancers with a modern Indian luxury aesthetic.</p>
+                    <div class="project-links"><a href="https://professional-project-inquiry-form.netlify.app/" target="_blank" class="project-link"><i
+                                class="fa-solid fa-arrow-up-right-from-square"></i>View</a><a href="https://github.com/aakhalidhruv28/Professional-Project-Inquiry-Form" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>Color Toolkit Project</h3>
+                    <p>A toolkit to generate, save, and explore colours with HEX/RGB formats.</p>
+                    <div class="project-links"><a href="https://github.com/aakhalidhruv28/Color-Toolkit-Project" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>Quote Generator</h3>
+                    <p>A web app that fetches random motivational quotes with author names.</p>
+                    <div class="project-links"><a href="https://github.com/aakhalidhruv28/Quote-Generator" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>To-Do List Web App</h3>
+                    <p>A simple, responsive To-Do List with add, delete, and save features.</p>
+                    <div class="project-links"><a href="https://github.com/aakhalidhruv28/To-Do-List-Web-App" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>Interactive Periodic Table</h3>
+                    <p>An interactive, clickable periodic table for chemistry learners.</p>
+                    <div class="project-links"><a href="https://github.com/aakhalidhruv28/Interactive-Periodic-Table" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>Liquid Glass Effect</h3>
+                    <p>A futuristic liquid glass design effect built using CSS & JS.</p>
+                    <div class="project-links"><a href="https://github.com/aakhalidhruv28/Liquid-Glass-Effect" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>YouTube Video Downloader</h3>
+                    <p>A web tool to download YouTube videos easily.</p>
+                    <div class="project-links"><a href="https://github.com/aakhalidhruv28/Youtube-Video-Downloader" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+                <div class="card project-item">
+                    <h3>Interactive Quiz App</h3>
+                    <p>A quiz web app with multiple-choice questions and scoring features.</p>
+                    <div class="project-links"><a href="https://github.com/aakhalidhruv28/Interactive-Quiz-App" target="_blank" class="project-link"><i class="fa-brands fa-github"></i>GitHub</a></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="card testimonials-card">
+            <h2 style="margin-bottom: 0px;">What People Say</h2>
+            <div class="testimonial-slider-container">
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <p>"Dhruv's designing sense and design knowledge are excellent. His attention to detail and creative approach consistently deliver outstanding results."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RP</div>
+                            <div class="author-info">
+                                <div class="author-name">Rajesh Patel</div>
+                                <div class="author-role">Business Owner</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <p>"Exceptional developer for converting designs to code perfectly. The precision and quality of work is remarkable, always exceeding expectations."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">DP</div>
+                            <div class="author-info">
+                                <div class="author-name">Dhruv Patel</div>
+                                <div class="author-role">UI-UX Designer</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-item">
+                        <div class="testimonial-content">
+                            <p>"Dhruv transformed my business from offline to online with web presence, social media setup, and Google Business optimization. He truly helped my business grow."
+                            </p>
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RP</div>
+                            <div class="author-info">
+                                <div class="author-name">Ranjit Patel</div>
+                                <div class="author-role">Entrepreneur</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-nav">
+                <button class="nav-dot active" data-slide="0"></button>
+                <button class="nav-dot" data-slide="1"></button>
+                <button class="nav-dot" data-slide="2"></button>
+            </div>
+            </div>
+        </section>
+
+        <section class="card contact-card">
+            <h2>Contact Me</h2>
+            <div class="contact-bento-grid">
+                <a href="mailto:dhruvaakhali@gmail.com" class="contact-bento-item"><i
+                        class="fa-solid fa-envelope"></i><span>Email</span></a>
+                <a href="https://www.linkedin.com/in/dhruvrpatel28102006/" target="_blank" class="contact-bento-item"><i
+                        class="fa-brands fa-linkedin"></i><span>LinkedIn</span></a>
+                <a href="https://instagram.com/dhruv.aakhali._.28" target="_blank" class="contact-bento-item"><i
+                        class="fa-brands fa-instagram"></i><span>Instagram</span></a>
+                <a href="https://github.com/aakhalidhruv28" target="_blank" class="contact-bento-item"><i
+                        class="fa-brands fa-github"></i><span>GitHub</span></a>
+                <a href="https://linktr.ee/dhruvrpatel" target="_blank" class="contact-bento-item"><i
+                        class="fa-solid fa-link"></i><span>Linktree</span></a>
+                <a href="https://discord.com/users/1079431931516690432" target="_blank" class="contact-bento-item"><i
+                        class="fa-brands fa-discord"></i><span>Discord</span></a>
+            </div>
+        </section>
+
+        <footer class="card footer">
             <p>&copy; 2025 Dhruv Patel. MIT Licensed.</p>
         </footer>
-    </div>
+
+    </main>
+
+    <script>
+        const spotlight = document.querySelector('.spotlight');
+        const cards = document.querySelectorAll('.card');
+
+        document.addEventListener('mousemove', (e) => {
+            spotlight.style.setProperty('--x', e.clientX + 'px');
+            spotlight.style.setProperty('--y', e.clientY + 'px');
+
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                card.style.setProperty('--x', (e.clientX - rect.left) + 'px');
+                card.style.setProperty('--y', (e.clientY - rect.top) + 'px');
+            });
+        });
+
+        // Enhanced Testimonial Slider with Drag/Swipe Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const testimonialSlider = document.getElementById('testimonialSlider');
+            const testimonialContainer = document.querySelector('.testimonial-slider-container');
+            const navDots = document.querySelectorAll('.nav-dot');
+
+            // Debug: Check if elements exist
+            console.log('Testimonial Slider:', testimonialSlider);
+            console.log('Testimonial Container:', testimonialContainer);
+            console.log('Nav Dots:', navDots);
+
+            if (!testimonialSlider || !testimonialContainer || navDots.length === 0) {
+                console.error('Testimonial slider elements not found!');
+                return;
+            }
+
+            let currentSlide = 0;
+            let autoSlideInterval;
+            let isDragging = false;
+            let startX = 0;
+            let currentX = 0;
+            let initialTransform = 0;
+            let animationId = 0;
+
+            function updateSlider(slideIndex, smooth = true) {
+                currentSlide = Math.max(0, Math.min(2, slideIndex));
+                const translateX = -currentSlide * 33.333;
+
+                if (smooth) {
+                    testimonialSlider.style.transition = 'transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+                } else {
+                    testimonialSlider.style.transition = 'none';
+                }
+
+                testimonialSlider.style.transform = `translateX(${translateX}%)`;
+
+                navDots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                });
+
+                console.log('Updated slider to slide:', currentSlide);
+            }
+
+            function startAutoSlide() {
+                // Auto-sliding disabled - function kept for potential future use
+                // autoSlideInterval = setInterval(() => {
+                //     if (!isDragging) {
+                //         currentSlide = (currentSlide + 1) % 3;
+                //         updateSlider(currentSlide);
+                //     }
+                // }, 5000);
+            }
+
+            function stopAutoSlide() {
+                // Auto-sliding disabled - function kept for potential future use
+                // clearInterval(autoSlideInterval);
+            }
+
+            function getPositionX(e) {
+                return e.type.includes('mouse') ? e.clientX : e.touches[0].clientX;
+            }
+
+            function handleStart(e) {
+                isDragging = true;
+                startX = getPositionX(e);
+                currentX = startX;
+                initialTransform = -currentSlide * 33.333;
+
+                testimonialSlider.classList.add('dragging');
+                testimonialSlider.style.transition = 'none';
+                stopAutoSlide();
+
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                }
+
+                console.log('Drag started');
+            }
+
+            function handleMove(e) {
+                if (!isDragging) return;
+
+                e.preventDefault();
+                currentX = getPositionX(e);
+                const diffX = currentX - startX;
+                const containerWidth = testimonialContainer.offsetWidth;
+                const movePercent = (diffX / containerWidth) * 100;
+                const newTransform = initialTransform + movePercent;
+
+                // Add resistance at boundaries
+                let resistanceTransform = newTransform;
+                if (newTransform > 0) {
+                    resistanceTransform = newTransform * 0.3;
+                } else if (newTransform < -66.666) {
+                    resistanceTransform = -66.666 + (newTransform + 66.666) * 0.3;
+                }
+
+                testimonialSlider.style.transform = `translateX(${resistanceTransform}%)`;
+            }
+
+            function handleEnd(e) {
+                if (!isDragging) return;
+
+                isDragging = false;
+                testimonialSlider.classList.remove('dragging');
+
+                const diffX = currentX - startX;
+                const containerWidth = testimonialContainer.offsetWidth;
+                const threshold = containerWidth * 0.2; // 20% threshold
+
+                let newSlide = currentSlide;
+
+                if (Math.abs(diffX) > threshold) {
+                    if (diffX > 0 && currentSlide > 0) {
+                        newSlide = currentSlide - 1;
+                    } else if (diffX < 0 && currentSlide < 2) {
+                        newSlide = currentSlide + 1;
+                    }
+                }
+
+                console.log('Drag ended, new slide:', newSlide);
+                updateSlider(newSlide);
+                // setTimeout(startAutoSlide, 3000); // Auto-sliding disabled
+            }
+
+            // Mouse events
+            testimonialContainer.addEventListener('mousedown', handleStart);
+            document.addEventListener('mousemove', handleMove);
+            document.addEventListener('mouseup', handleEnd);
+
+            // Touch events
+            testimonialContainer.addEventListener('touchstart', handleStart, {
+                passive: false
+            });
+            testimonialContainer.addEventListener('touchmove', handleMove, {
+                passive: false
+            });
+            testimonialContainer.addEventListener('touchend', handleEnd);
+
+            // Navigation dot click handlers
+            navDots.forEach((dot, index) => {
+                dot.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    console.log('Nav dot clicked:', index);
+                    // stopAutoSlide(); // Auto-sliding disabled
+                    updateSlider(index);
+                    // setTimeout(startAutoSlide, 3000); // Auto-sliding disabled
+                });
+
+                // Add visual feedback
+                dot.style.cursor = 'pointer';
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                    // stopAutoSlide(); // Auto-sliding disabled
+                    updateSlider(currentSlide - 1);
+                    // setTimeout(startAutoSlide, 3000); // Auto-sliding disabled
+                } else if (e.key === 'ArrowRight' && currentSlide < 2) {
+                    // stopAutoSlide(); // Auto-sliding disabled
+                    updateSlider(currentSlide + 1);
+                    // setTimeout(startAutoSlide, 3000); // Auto-sliding disabled
+                }
+            });
+
+            // Pause on hover - disabled since auto-sliding is off
+            const testimonialCard = document.querySelector('.testimonials-card');
+            // testimonialCard.addEventListener('mouseenter', stopAutoSlide); // Auto-sliding disabled
+            // testimonialCard.addEventListener('mouseleave', () => {
+            //     if (!isDragging) startAutoSlide();
+            // }); // Auto-sliding disabled
+
+            // Prevent context menu on long press
+            testimonialContainer.addEventListener('contextmenu', (e) => {
+                if (isDragging) e.preventDefault();
+            });
+
+            // Initialize
+            updateSlider(0, false);
+            // startAutoSlide(); // Auto-sliding disabled
+
+            // Expose functions for debugging
+            window.testimonialSliderDebug = {
+                updateSlider,
+                currentSlide: () => currentSlide,
+                goToSlide: (index) => updateSlider(index)
+            };
+
+            console.log('Testimonial slider initialized successfully!');
+        });
+    </script>
 </body>
+
 </html>
